@@ -14,7 +14,7 @@ import (
 )
 
 // New return a new *Echo
-func New(db *gorm.DB, secret *string) *echo.Echo {
+func New(db *gorm.DB, secret []byte) *echo.Echo {
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{DB: db}}))
 
@@ -25,7 +25,7 @@ func New(db *gorm.DB, secret *string) *echo.Echo {
 	// environmental variable, or flag (or both), and don't accidentally commit it
 	// alongside your code. Ensure your key is sufficiently random - i.e. use Go's
 	// crypto/rand or securecookie.GenerateRandomKey(32) and persist the result.
-	e.Use(session.Middleware(sessions.NewCookieStore([]byte(*secret))))
+	e.Use(session.Middleware(sessions.NewCookieStore(secret)))
 
 	e.Pre(middleware.AddTrailingSlash())
 
@@ -35,13 +35,13 @@ func New(db *gorm.DB, secret *string) *echo.Echo {
 	// e.Use(middleware.Logger())
 
 	// gqlgen
-	e.GET("/", echo.WrapHandler(playground.Handler("GraphQL playground", "/query")))
+	e.GET("/playground/", echo.WrapHandler(playground.Handler("GraphQL playground", "/query")))
 	e.POST("/query/", echo.WrapHandler(srv))
 
 	// TODO a middleware for flood check
 
 	// Root
-	e.GET("/home/", controller.Home(db))
+	e.GET("/", controller.Home(db))
 
 	return e
 }

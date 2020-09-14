@@ -20,5 +20,5 @@ require (
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73 // indirect
 	golang.org/x/sys v0.0.0-20200909081042-eff7692f9009 // indirect
 	golang.org/x/text v0.3.3 // indirect
-	gorm.io/gorm v1.20.1 // indirect
+	gorm.io/gorm v1.20.1
 )
