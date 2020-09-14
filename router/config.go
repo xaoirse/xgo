@@ -4,9 +4,9 @@ import (
 	"io"
 	"text/template"
 
+	"github.com/gorilla/securecookie"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
-	uuid "github.com/satori/go.uuid"
 )
 
 // Template for echo
@@ -20,10 +20,9 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 // Start Echo
-func Start(db *gorm.DB, port, secret *string) {
-
-	if *secret == "" {
-		*secret = uuid.NewV4().String()
+func Start(db *gorm.DB, port *string, secret []byte) {
+	if len(secret) == 0 {
+		secret = securecookie.GenerateRandomKey(32)
 	}
 
 	r := New(db, secret)
