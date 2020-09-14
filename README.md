@@ -17,7 +17,7 @@ Simple web app for using GraphQL, GORM (with sqlite3) and Echo together. Just cl
 - `go run github.com/99designs/gqlgen generate`
 - Insert your models in `graph/model/model.go`
 - Complate resolvers in `schema.resolvers.go`
-- Routin in `router/router.go`
+- Routing in `router/router.go`
 - Controllers are in `controller` or anywhere
 - `go run server.go` or `go build`
 
