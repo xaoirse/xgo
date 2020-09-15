@@ -25,3 +25,4 @@ Simple web app for using GraphQL, GORM (with sqlite3) and Echo together. Just cl
 
 ## TODO
 - [ ] go:generate
+- [ ] general router.go for using any router in config.go 
