@@ -5,18 +5,37 @@ package graph
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/xaoirse/xgo/graph/generated"
 	"github.com/xaoirse/xgo/graph/model"
 )
 
+// Run this in Playground
+// mutation{
+//   createUser(input:{name:"mamad"}) {
+//     name
+//     id
+//   }
+// }
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (*model.User, error) {
-	panic(fmt.Errorf("not implemented"))
+	user := &model.User{
+		Name: input.Name,
+	}
+	r.DB.Create(user)
+	return user, nil
 }
 
+// Run this in Playground
+// query{
+// 	users{
+// 	  name
+// 	  id
+// 	}
+//   }
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	panic(fmt.Errorf("not implemented"))
+	var users []*model.User
+	r.DB.Find(&users)
+	return users, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
