@@ -3,12 +3,12 @@
 Simple web app for using GraphQL, GORM (with sqlite3) and Echo together. Just clone and run it.
 
 ## Requirements
-`go.mod` has all requirements but if you want install manually:
+`go.mod` has all requirements but if you want to install manually:
 - `git clone github.com/xaoirse/xgo` for clone XGO
 - `cd XGO`
-- `go get github.com/99designs/gqlgen` for install gqlgen.<br/> 
-- `go get -u gorm.io/gorm` for install gorm.<br/> 
-- `go get -u github.com/labstack/echo/...` for install echo.<br/> 
+- `go get github.com/99designs/gqlgen` for get gqlgen.<br/> 
+- `go get -u gorm.io/gorm` for get gorm.<br/> 
+- `go get -u github.com/labstack/echo/...` for get echo.<br/> 
 
 
 
@@ -24,5 +24,5 @@ Simple web app for using GraphQL, GORM (with sqlite3) and Echo together. Just cl
 *NOTE: Find and replace mod name if you want*
 
 ## TODO
-- [ ] go:generate
-- [ ] general router.go for using any router in config.go 
+- [ ] go:generate (Maybe not)
+- [ ] general router.go for using any router in config.go (Maybe not)

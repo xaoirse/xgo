@@ -2,12 +2,15 @@ package router
 
 import (
 	"io"
+	"log"
 	"text/template"
 
 	"github.com/gorilla/securecookie"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
 )
+
+var db *gorm.DB
 
 // Template for echo
 type Template struct {
@@ -23,6 +26,9 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 func Start(db *gorm.DB, port *string, secret []byte) {
 	if len(secret) == 0 {
 		secret = securecookie.GenerateRandomKey(32)
+		if secret == nil {
+			log.Fatal("Failed to generate random secret!\nPlease insert a secret like this: -s [secret]")
+		}
 	}
 
 	r := New(db, secret)

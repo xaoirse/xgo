@@ -10,13 +10,6 @@ import (
 	"github.com/xaoirse/xgo/graph/model"
 )
 
-// Run this in Playground
-// mutation{
-//   createUser(input:{name:"mamad"}) {
-//     name
-//     id
-//   }
-// }
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (*model.User, error) {
 	user := &model.User{
 		Name: input.Name,
@@ -25,13 +18,6 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) 
 	return user, nil
 }
 
-// Run this in Playground
-// query{
-// 	users{
-// 	  name
-// 	  id
-// 	}
-//   }
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
 	var users []*model.User
 	r.DB.Find(&users)
