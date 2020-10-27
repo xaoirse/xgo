@@ -8,6 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// Session is a type for session
 type Session struct {
 	gorm.Model
 	Username string

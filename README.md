@@ -24,5 +24,6 @@ Simple web app for using GraphQL, GORM (with sqlite3) and Echo together. Just cl
 *NOTE: Find and replace mod name if you want*
 
 ## TODO
+- [ ] Admin panel with Flutter (Its cool for me!)
 - [ ] go:generate (Maybe not)
-- [ ] general router.go for using any router in config.go (Maybe not)
+- [ ] General router.go for being independent of Echo in config.go (Maybe not)
