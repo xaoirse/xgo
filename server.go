@@ -16,7 +16,7 @@ func getDb() *gorm.DB {
 	if err != nil {
 		log.Fatalln("Error in opening db:", err)
 	}
-	db.AutoMigrate(model.SetModels()...)
+	db.AutoMigrate(model.GetModels()...)
 	return db
 }
 

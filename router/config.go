@@ -31,10 +31,10 @@ func Start(db *gorm.DB, port *string, secret []byte) {
 		}
 	}
 
-	r := New(db, secret)
+	e := New(db, secret)
 
 	t := &Template{templates: template.Must(template.ParseGlob("template/*.html"))}
-	r.Renderer = t
+	e.Renderer = t
 
-	r.Logger.Fatal(r.Start(":" + *port))
+	e.Logger.Fatal(e.Start(":" + *port))
 }

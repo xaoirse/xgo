@@ -5,8 +5,10 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-func SetModels() []interface{} {
+// GetModels return models
+func GetModels() []interface{} {
 	return []interface{}{
+		&Session{},
 		&User{},
 	}
 }
