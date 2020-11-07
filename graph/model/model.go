@@ -1,16 +1,23 @@
 package model
 
 import (
+	"log"
+
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
+
 	"github.com/jinzhu/gorm"
 	uuid "github.com/satori/go.uuid"
 )
 
-// GetModels return models
-func GetModels() []interface{} {
-	return []interface{}{
-		&Session{},
-		&User{},
+func GetDb() *gorm.DB {
+	db, err := gorm.Open("sqlite3", "data.db")
+	if err != nil {
+		log.Fatalln("Error in opening db:", err)
 	}
+	db.AutoMigrate(
+		// &Session{},
+		&User{})
+	return db
 }
 
 // BeforeCreate is a gorm hook

@@ -11,7 +11,7 @@ import (
 	"github.com/xaoirse/xgo/controller"
 	"github.com/xaoirse/xgo/graph"
 	"github.com/xaoirse/xgo/graph/generated"
-	"github.com/xaoirse/xgo/graph/model"
+	mySession "github.com/xaoirse/xgo/session"
 )
 
 // New return a new *Echo
@@ -42,12 +42,9 @@ func New(db *gorm.DB, secret []byte) *echo.Echo {
 
 	// Root
 	e.POST("/login/", controller.Login(db))
-	// fmt.Println("/login/post")
 	e.GET("/login/", controller.LoginPage(db))
-	// fmt.Println("/login/get")
-	e.Use(model.SessionChecker(db))
-	// fmt.Println("use")
-	e.GET("/", controller.Home(db)) //, model.SessionChecker(db))
-	// fmt.Println("/")
+	e.Use(mySession.Secure)
+	e.GET("/", controller.Home(db))
+
 	return e
 }

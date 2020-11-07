@@ -4,21 +4,10 @@ import (
 	"flag"
 	"log"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/xaoirse/xgo/graph/model"
 	_ "github.com/xaoirse/xgo/graph/plugin"
 	"github.com/xaoirse/xgo/router"
 )
-
-func getDb() *gorm.DB {
-	db, err := gorm.Open("sqlite3", "data.db")
-	if err != nil {
-		log.Fatalln("Error in opening db:", err)
-	}
-	db.AutoMigrate(model.GetModels()...)
-	return db
-}
 
 const defaultPort = "4000"
 
@@ -28,10 +17,10 @@ func main() {
 	secret := flag.String("s", "", "Secret")
 	flag.Parse()
 
-	db := getDb()
+	db := model.GetDb()
 	defer func() {
 		if err := db.Close(); err != nil {
-			log.Fatalln("Error when closing db:", err)
+			log.Fatalln("Error while closing db:", err)
 		}
 	}()
 

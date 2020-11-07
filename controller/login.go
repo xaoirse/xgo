@@ -3,10 +3,9 @@ package controller
 import (
 	"net/http"
 
-	"github.com/xaoirse/xgo/graph/model"
-
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
+	"github.com/xaoirse/xgo/session"
 )
 
 func LoginPage(db *gorm.DB) func(echo.Context) error {
@@ -17,10 +16,8 @@ func LoginPage(db *gorm.DB) func(echo.Context) error {
 
 func Login(db *gorm.DB) func(echo.Context) error {
 	return func(c echo.Context) error {
-		s := &model.Session{
-			Username: c.FormValue("username"),
-		}
-		s.Save(c, db)
+		session.SetValue(c, "username", c.FormValue("username"))
+		session.Save(c)
 		return c.Redirect(http.StatusSeeOther, "/")
 	}
 }
