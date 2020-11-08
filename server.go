@@ -4,7 +4,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/xaoirse/xgo/graph/model"
+	"github.com/xaoirse/xgo/repository"
+	// It's for init hook mutatehooks
 	_ "github.com/xaoirse/xgo/graph/plugin"
 	"github.com/xaoirse/xgo/router"
 )
@@ -17,7 +18,8 @@ func main() {
 	secret := flag.String("s", "", "Secret")
 	flag.Parse()
 
-	db := model.GetDb()
+	repository.InitDB()
+	db := repository.GetDB()
 	defer func() {
 		if err := db.Close(); err != nil {
 			log.Fatalln("Error while closing db:", err)

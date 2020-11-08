@@ -14,13 +14,14 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) 
 	user := &model.User{
 		Name: input.Name,
 	}
-	r.DB.Create(user)
+
+	r.Rep.Create(user)
 	return user, nil
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
 	var users []*model.User
-	r.DB.Find(&users)
+	r.Rep.Find(&users)
 	return users, nil
 }
 

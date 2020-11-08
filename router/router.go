@@ -11,13 +11,18 @@ import (
 	"github.com/xaoirse/xgo/controller"
 	"github.com/xaoirse/xgo/graph"
 	"github.com/xaoirse/xgo/graph/generated"
+	"github.com/xaoirse/xgo/repository"
 	mySession "github.com/xaoirse/xgo/session"
 )
 
 // New return a new *Echo
 func New(db *gorm.DB, secret []byte) *echo.Echo {
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{DB: db}}))
+	srv := handler.NewDefaultServer(
+		generated.NewExecutableSchema(
+			generated.Config{
+				Resolvers: &graph.Resolver{
+					Rep: repository.GetRepository()}}))
 
 	e := echo.New()
 
@@ -41,10 +46,10 @@ func New(db *gorm.DB, secret []byte) *echo.Echo {
 	// TODO a middleware for flood check
 
 	// Root
-	e.POST("/login/", controller.Login(db))
-	e.GET("/login/", controller.LoginPage(db))
+	e.POST("/login/", controller.PostLogin)
+	e.GET("/login/", controller.GetLogin)
 	e.Use(mySession.Secure)
-	e.GET("/", controller.Home(db))
+	e.GET("/", controller.GetHome)
 
 	return e
 }
